@@ -1,4 +1,3 @@
-
 from django.urls import path
 from .views import About , Home , Contact , Login ,Logout_admin , Logout
 
