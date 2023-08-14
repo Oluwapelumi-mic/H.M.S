@@ -8,7 +8,7 @@ class Doctor(models.Model):
     speciality = models.CharField(max_length=50)
 
     def __str__(self):
-        return  'Dr ' + self.Name
+        return    self.name
 
 class Patient(models.Model):
     name = models.CharField(max_length=45)
