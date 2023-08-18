@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'index.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+<div>
+
+    <h2 class="text-center">Appointments </h2>
+    <table id="example" class="table table-hover">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Patient</th>
+                <th>Doctor Assigned</th>
+                <th>Date of Appointment</th>
+                <th>Appointment Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in apt %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.Patient}}</td>
+                <td>{{i.Doctor}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.time}}</td>
+                <td><a href="{% url 'delete_appointment' i.id %}" onclick="return confirm('Are you sure you want to Delete this Appointment? ')" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}
+
+
+
+{% include 'footer.html' %}

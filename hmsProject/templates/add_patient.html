@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'index.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+
+{% if error == "no" %}
+<script>
+    alert('Patient added successfully');
+    window.location = "{% url 'view_patient' %}";
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('unable to add patient, try again');
+</script>
+{% endif %}
+
+<div class="container">
+    <h2 class="text-center">Add Patient</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label><strong> Patient's Name</strong> </label>
+        <input type="text" class="form-control" name="pname" placeholder="Enter Name">
+        <label> <strong>Gender</strong></label>
+        <input type="text" class="form-control" name="pgender" placeholder="Enter gender">
+        <label> <strong>Mobile Number</strong></label>
+        <input type="text" class="form-control" name="pmobile_no" placeholder="Enter phone number">
+        <label><strong> Address</strong></label>
+        <input type="text" class="form-control" name="paddress" placeholder="Enter Patient's address">
+        <input type="submit" value="submit" class="form-control btn btn-primary">
+    </form>
+
+</div>
+{% endblock content %}
+
+
+
+{% include 'footer.html' %}

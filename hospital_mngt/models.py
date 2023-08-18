@@ -11,10 +11,10 @@ class Doctor(models.Model):
         return    self.name
 
 class Patient(models.Model):
-    name = models.CharField(max_length=45)
-    gender = models.CharField(max_length=7, default="")
-    mobile_no = models.CharField(max_length=11, null=True, blank=True)
-    address =models.TextField()
+    pname = models.CharField(max_length=45)
+    pgender = models.CharField(max_length=7, default="")
+    pmobile_no = models.CharField(max_length=11, null=True, blank=True)
+    paddress = models.TextField()
 
     def __str__(self):
         return self.Name

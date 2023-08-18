@@ -4,15 +4,16 @@
 
 {% block content %}
 
+
 {% if error == "no" %}
 <script>
     alert('Doctor added successfully');
-    window.location = "{% url 'home' %}";
+    window.location = "{% url 'view_doctor' %}";
 </script>
 {% endif %}
 {% if error == "yes" %}
 <script>
-    alert('unable to add doctor, try again');
+    alert('unable to add Doctor, try again');
 </script>
 {% endif %}
 
@@ -20,15 +21,17 @@
     <h2 class="text-center">Add Doctor</h2>
     <form method="POST">
         {% csrf_token %}
-        <label> Doctor's Name </label>
+        <label> <strong>Doctor's Name</strong> </label>
         <input type="text" class="form-control" name="name" placeholder="Enter Name">
-        <label> Gender</label>
-        <input type="password" class="form-control" name="gender" placeholder="Enter gender">
-        <label> Mobile Number</label>
-        <input type="password" class="form-control" name="Mobile_no" placeholder="Enter phone number">
-        <label> Gender</label>
-        <input type="password" class="form-control" name="speciality" placeholder="Enter speciality">
-        <input type="submit" value="Login" class="form-control btn btn-primary">
+        <label> <strong>Gender</strong></label>
+        <input type="text" class="form-control" name="gender" placeholder="Enter gender">
+        <label><strong> Mobile Number</strong></label>
+        <input type="text" class="form-control" name="mobile_no" placeholder="Enter phone number">
+        <label> <strong>Email Address</strong></label>
+        <input type="text" class="form-control" name="email" placeholder="enter Email">
+        <label><strong> Speciality </strong></label>
+        <input type="text" class="form-control" name="speciality" placeholder="Enter speciality">
+        <input type="submit" value="submit" class="form-control btn btn-primary">
     </form>
 
 </div>

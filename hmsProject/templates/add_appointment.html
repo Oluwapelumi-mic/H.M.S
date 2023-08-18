@@ -1,0 +1,49 @@
+{% load static %}
+{% include 'index.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+
+{% if error == "no" %}
+<script>
+    alert('Booked successfully');
+    window.location = "{% url 'view_appointment' %}";
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('unable to book appointments, try again');
+</script>
+{% endif %}
+
+<div class="container">
+    <h2 class="text-center">Book Appointments</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label><strong> Doctor's Name </strong></label>
+        <select name="doctor" class="form-control">
+            {% for i in doctor %}
+            <option value="{{ i.name }}">{{ i.name }}</option>
+            {% endfor %}
+        </select>
+        <label> <strong>Patient's Name </strong> </label>
+        <select name="doctor" class="form-control">
+            {% for i in patient %}
+            <option value="{{ i.pname }}">{{ i.pname }}</option>
+            {% endfor %}
+        </select>
+        <label><strong> Appointment Date </strong></label>
+        <input type="date" class="form-control" name="date" placeholder="">
+        <label><strong>Appointment Time </strong></label>
+        <input type="time" class="form-control" name="time" placeholder="">
+
+        <button type="submit" value="submit" class="form-control btn btn-primary"> Book Now</button>
+
+    </form>
+
+</div>
+{% endblock content %}
+
+
+
+{% include 'footer.html' %}

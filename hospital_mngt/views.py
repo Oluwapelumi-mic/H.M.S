@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render , redirect
 from django.contrib.auth import authenticate, login, logout
-from .models import Doctor
+from .models import Doctor, Patient , Appointment
 # Create your views here.
 def About(request):
     return render(request,'about.html' )
@@ -66,19 +66,92 @@ def Add_Doctor(request):
     error = ""
     if not request.user.is_staff:
         return redirect('login')
-    
     if request.method =="POST":
         n = request.POST['name']
         g = request.POST['gender']
         m = request.POST['mobile_no']
         sp = request.POST['speciality']
-
         try:
-            Doctor =Doctor.objects.create(name=n, gender=g,mobile_no=m,speciality=sp)
+            Doctor.objects.create(name=n, gender=g,mobile_no=m,speciality=sp)
             error = "no"
-
         except:
             error = "yes"
-            d = {"error": error}
+
+    d = {"error": error}
     return render(request, 'add_doctor.html', d)
+
+
+def View_Patient(request):
+    if not request.user.is_staff:
+        return redirect('login')
+    pat = Patient.objects.all()
+    d ={'pat': pat }
+    return render(request, 'view_patient.html', d)
+
+
+def Delete_Patient(request, pid):
+    if not request.user.is_staff:
+        return redirect('login')
+    patient = Patient.objects.get(id =pid)
+    patient.delete()
+    return redirect('view_patient')
+
+
+
+def Add_Patient(request):
+    error = ""
+    if not request.user.is_staff:
+        return redirect('login')
+    if request.method =="POST":
+        nm = request.POST['pname']
+        gd = request.POST['pgender']
+        mn = request.POST['pmobile_no']
+        a = request.POST['paddress']
+        try:
+            Patient.objects.create(pname=nm, pgender=gd,pmobile_no=mn,paddress=a)
+            error = "no"
+        except:
+            error = "yes"
+
+    p = {"error": error}
+    return render(request, 'add_patient.html', p)
+
+def View_Appointment(request):
+    if not request.user.is_staff:
+        return redirect('login')
+    apt = Appointment.objects.all()
+    a ={'apt': apt }
+    return render(request, 'view_appointments.html', a)
+
+
+def Delete_Appointment(request, pid):
+    if not request.user.is_staff:
+        return redirect('login')
+    appointment = Appointment.objects.get(id =pid)
+    appointment.delete()
+    return redirect('view_appointments')
+
+
+
+def Add_Appointment(request):
+    error = ""
+    if not request.user.is_staff:
+        return redirect('login')
+    doctor1 = Doctor.objects.all()
+    patient1 = Patient.objects.all()
+    if request.method =="POST":
+        dc = request.POST['doctor']
+        p = request.POST['patient']
+        d = request.POST['date']
+        t = request.POST['time']
+        doctor = Doctor.objects.filter(name=dc).first()
+        patient = Patient.objects.filter(pname=p).first()
+        try:
+            Appointment.objects.create(doctor=doctor, date=d,time=t,Patient=patient)
+            error = "no"
+        except:
+            error = "yes"
+
+    a = {"error": error ,"doctor": doctor1 ,"patient":patient1}
+    return render(request, 'add_appointment.html', a)
                 
