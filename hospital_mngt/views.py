@@ -12,6 +12,8 @@ def Home(request):
 def Contact(request):
     return render(request, 'contact.html')
 
+
+
 def Logout(request):
     return render(request, 'base.html')
 
@@ -69,13 +71,15 @@ def Add_Doctor(request):
     if request.method =="POST":
         n = request.POST['name']
         g = request.POST['gender']
+        e = request.POST['email']
         m = request.POST['mobile_no']
         sp = request.POST['speciality']
         try:
-            Doctor.objects.create(name=n, gender=g,mobile_no=m,speciality=sp)
+            Doctor.objects.create(name=n, gender=g,mobile_no=m,speciality=sp, email=e)
             error = "no"
-        except:
+        except Exception as e:
             error = "yes"
+            print(e)
 
     d = {"error": error}
     return render(request, 'add_doctor.html', d)
@@ -147,11 +151,27 @@ def Add_Appointment(request):
         doctor = Doctor.objects.filter(name=dc).first()
         patient = Patient.objects.filter(pname=p).first()
         try:
-            Appointment.objects.create(doctor=doctor, date=d,time=t,Patient=patient)
+            Appointment.objects.create(doctor=doctor, date=d,time=t,patient=patient)
             error = "no"
         except:
             error = "yes"
 
     a = {"error": error ,"doctor": doctor1 ,"patient":patient1}
     return render(request, 'add_appointment.html', a)
+
+def Index(request):
+    if not request.user.is_staff:
+        return redirect('login')
+    
+    doctor_count = Doctor.objects.count()
+    patient_count = Patient.objects.count()
+    appointment_count = Appointment.objects.count()
+
+    context = {
+        'doctor_count': doctor_count,
+        'patient_count': patient_count,
+        'appointment_count': appointment_count
+    }
+
+    return render(request, 'base.html', context)
                 

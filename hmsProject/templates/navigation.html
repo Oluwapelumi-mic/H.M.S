@@ -6,6 +6,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
+        {% if not request.user.is_staff %}
         <li class="nav-item active">
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
         </li>
@@ -15,12 +16,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'contact' %}" >Contact Us</a>
         </li>
-        {% if not request.user.is_staff %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
         {% endif %}
         {% if request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}" >Dashboard</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Doctors

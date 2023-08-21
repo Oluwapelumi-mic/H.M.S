@@ -1,11 +1,47 @@
 {% load static %}
 {% include 'index.html' %}
 {% include 'navigation.html' %}
+<style>
+    .mydivstyle:hover {
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 3);
+        transform: translateY(-20px);
+    }
+    hr.rounded {
+    border-top : 10px solid rgb(34, 119, 147);
+    border-radius: 5px;
+    }
 
+
+</style>
 {% block content %}
-<div class="site-heading text-center">
-<h1>Admin Dashboard </h1>
-<p>Thanks for the time <br> click the link to go back to the login page <a href="admin_login"> Go back</a> </p>
+<h1 class="site-heading text-center">Admin Dashboard</h1>
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+       
+        <div class="col-sm-4 mydivstyle">
+            <h2 style="color:red;">{{ doctor_count }}</h2>
+            <a href="{% url 'view_doctor' %}" style="text-decoration: none;">
+                <h4 style="color: rgb(34, 34, 126)">Doctors</h4>
+                <hr class="rounded">
+            </a>
+        </div>
+        <div class="col-sm-4 mydivstyle">
+            <h2 style="color:red;">{{ patient_count }}</h2>
+            <a href="{% url 'view_patient' %}" style="text-decoration: none;">
+                <h4 style="color: rgb(34, 34, 126)">Patients</h4>
+                <hr class="rounded">
+            </a>
+        </div>
+            <div class="col-sm-4 mydivstyle">
+                <h2 style="color:red;">{{ appointment_count }}</h2>
+                <a href="{% url 'view_appointment' %}" style="text-decoration: none;">
+                    <h4 style="color: rgb(34, 34, 126)">Appointments</h4>
+                    <hr class="rounded">
+                </a>
+        </div>
+    </div>
 </div>
-{% endblock content %}
+
+{% endblock  %}
 {% include 'footer.html' %}

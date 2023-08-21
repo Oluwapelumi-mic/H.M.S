@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import About , Home , Contact , Login ,Logout_admin , Logout, View_Doctor,Delete_Doctor, Add_Doctor ,Add_Patient ,Delete_Patient, View_Patient , View_Appointment ,Add_Appointment ,Delete_Appointment
+from .views import About , Home , Contact ,Index, Login ,Logout_admin , Logout, View_Doctor,Delete_Doctor, Add_Doctor ,Add_Patient ,Delete_Patient, View_Patient , View_Appointment ,Add_Appointment ,Delete_Appointment
 
 urlpatterns = [
     path('', Home , name='home'),
     path('about/', About , name='about'),
     path('contact/', Contact , name='contact'),
+    path('dashboard/', Index , name='dashboard'),
     path('lO/', Logout , name='Logout'),
     path('admin_login/', Login, name='login'),
     path('Logout/', Logout_admin, name='logout'),

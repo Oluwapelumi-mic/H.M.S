@@ -4,6 +4,7 @@ from django.db import models
 class Doctor(models.Model):
     name = models.CharField(max_length=45)
     email = models.EmailField(max_length=40)
+    gender = models.CharField(max_length=10, null=True, blank=True)
     mobile_no = models.CharField(max_length=11, null=True, blank=True)
     speciality = models.CharField(max_length=50)
 
@@ -17,7 +18,7 @@ class Patient(models.Model):
     paddress = models.TextField()
 
     def __str__(self):
-        return self.Name
+        return self.pname
 
 class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)

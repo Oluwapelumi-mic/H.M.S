@@ -27,7 +27,7 @@
             {% endfor %}
         </select>
         <label> <strong>Patient's Name </strong> </label>
-        <select name="doctor" class="form-control">
+        <select name="patient" class="form-control">
             {% for i in patient %}
             <option value="{{ i.pname }}">{{ i.pname }}</option>
             {% endfor %}
@@ -36,8 +36,8 @@
         <input type="date" class="form-control" name="date" placeholder="">
         <label><strong>Appointment Time </strong></label>
         <input type="time" class="form-control" name="time" placeholder="">
-
-        <button type="submit" value="submit" class="form-control btn btn-primary"> Book Now</button>
+        <br><br>
+        <button type="submit" value="submit" class="form-control btn btn-dark"> Book Now</button>
 
     </form>
 
